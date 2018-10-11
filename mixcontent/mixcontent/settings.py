@@ -21,6 +21,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'og0ful6ghgi3rv!&y03@l5ym#+@9$s&zvugs3=ksm!nf8kpv2&'
 
+
+CELERY_RESULT_BACKEND = 'db+postgresql+psycopg2://testdatabaseuser:12345@127.0.0.1:5432/testdatabase'
+# db+postgresql+psycopg2
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -91,6 +98,7 @@ DATABASES = {
     }
 }
 
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -139,3 +147,4 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.BasicAuthentication',
     ),
 }
+

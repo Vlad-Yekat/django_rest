@@ -7,8 +7,8 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 class PostVer2(models.Model):
     title = models.CharField(max_length=120)
     counter = models.IntegerField(default=0)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    object_id = models.PositiveIntegerField(null=True)
     tagged_object = GenericForeignKey('content_type', 'object_id')
 
     def __unicode__(self):
@@ -72,4 +72,3 @@ class Texts(models.Model):
 
     def __str__(self):
         return self.TextDetail
-

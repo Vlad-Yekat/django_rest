@@ -15,14 +15,15 @@ class MixPostAdmin(admin.ModelAdmin):
             return "track file:"
 
 
-admin.site.register(MixPost, MixPostAdmin)
-admin.site.register(Video)
-admin.site.register(Audio)
-admin.site.register(Texts)
+# admin.site.register(MixPost, MixPostAdmin)
+# admin.site.register(Video)
+# admin.site.register(Audio)
+# admin.site.register(Texts)
 
 
 class PostVer2Admin(admin.ModelAdmin):
     list_display = ('id', 'title', 'counter', 'content_type')
+    search_fields = ['^title']  # with begin of title only
 
 
 class VideoVer2Admin(admin.ModelAdmin):
