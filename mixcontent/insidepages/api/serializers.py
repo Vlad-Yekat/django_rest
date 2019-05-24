@@ -1,3 +1,4 @@
+from __future__ import print_function
 from rest_framework import serializers
 
 from insidepages.models import MixPost, Video, Audio, Texts
@@ -10,7 +11,7 @@ class PostVer2ObjectRelatedField(serializers.RelatedField):
         fields = 'content_type'
         read_only_fields = ['content_type']
 
-    def to_representation(self, value ):
+    def to_representation(self, value):
         date = super(PostVer2ObjectRelatedField, self).to_representation(value)
 
         if isinstance(value, VideoVer2):
@@ -24,20 +25,8 @@ class PostVer2ObjectRelatedField(serializers.RelatedField):
 
         return serializer.data
 
-        #if isinstance(value, VideoVer2):
-        #    return 'Video: ' + value.ref_video
-        #elif isinstance(value, AudioVer2):
-        #    return 'Audio: ' + value.bit_rate
-        #elif isinstance(value, TextVer2):
-        #    return 'Text: ' + value.text
-        #else:
-        #    return '???'
-        #raise Exception('Unexpected type of content')
-
 
 class PostVer2Serializer(serializers.ModelSerializer):
-
-    #content_type = PostVer2ObjectRelatedField(read_only=True)
 
     class Meta:
         model = PostVer2
@@ -77,11 +66,6 @@ class PostVer2Serializer(serializers.ModelSerializer):
 
         main_arr.append(row_arr)
 
-        #qs = BlogPost.objects.filter(title__iexact=value) # including instance
-        #if self.instance:
-        ##    qs = qs.exclude(pk=self.instance.pk)
-        #if qs.exists():
-
         return main_arr
 
 
@@ -89,8 +73,7 @@ class PostVer2DetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PostVer2
-     rr)])
-                main_arr.extend(row_arr)   fields = ('pk', 'title', 'counter', 'content_type', 'object_id')
+        fields = ('pk', 'title', 'counter', 'content_type', 'object_id')
 
     def to_representation(self, instance):
         main_arr = []
@@ -102,7 +85,6 @@ class PostVer2DetailSerializer(serializers.ModelSerializer):
 
         for row_dict, val in date.items():
             print(row_dict, val)
-
 
             if row_dict == 'content_type':
                 res_arr = []
@@ -125,21 +107,11 @@ class PostVer2DetailSerializer(serializers.ModelSerializer):
                     row_arr.update([('content', res_arr)])
                 else:
                     res_arr.append('Unknown content')
-                    row_arr.update([('content', res_a
+                    row_arr.update([('content', res_arr)])
                 print(row_arr)
 
             else:
-                #row_arr.update([(row_dict, val)])
                 pass
-
-
-        #main_arr.append(row_arr)
-
-
-        # qs = BlogPost.objects.filter(title__iexact=value) # including instance
-        # if self.instance:
-        ##    qs = qs.exclude(pk=self.instance.pk)
-        # if qs.exists():
 
         return main_arr
 
@@ -168,7 +140,6 @@ class TextVer2Serializer(serializers.ModelSerializer):
         fields = ('pk', 'short', 'full')
 
 
-#class PostsSerializer(serializers.HyperlinkedModelSerializer):
 class PostsSerializer(serializers.ModelSerializer):
 
     content = serializers.StringRelatedField(many=True)
@@ -176,10 +147,7 @@ class PostsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MixPost
-        # fields = ('pk', 'url', 'title', 'counter', 'ref_content')
         fields = ('pk', 'title', 'counter', 'ref_content', 'type_content', 'content', 'content_type')
 
     def get_content_type(self, obj):
         return 'some describe '
-
-

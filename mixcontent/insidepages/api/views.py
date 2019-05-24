@@ -45,22 +45,11 @@ class PostVer2List(generics.ListAPIView):
 class PostsList(generics.ListAPIView):
     queryset = MixPost.objects.all().order_by('pk')
     serializer_class = PostsSerializer
-    # pagination_class = PageNumberPagination
-
-    # print('aaa2')
-    # aaa = MixPost(id = 4)
-    # aaa.counter = 5
-    # aaa.save()
-
-    # def perform_create(self, serializer):
-    #    serializer.save()
 
 
 class PostsDetail(generics.RetrieveAPIView):
     lookup_field = 'pk'
-    #queryset = MixPost.objects.all()
     serializer_class = PostsSerializer
-
 
     def get(self, request, pk, format=None):
         one_post = self.get_object()
@@ -69,47 +58,10 @@ class PostsDetail(generics.RetrieveAPIView):
         one_post.save()
         return Response(serializer.data)
 
-
-    # def post(self, request, format=None):
-    #    pass
-
-    # def perform_create(self, serializer):
-    #   pass  #  todo update
-
     def get_queryset(self):
         qs = MixPost.objects.all()
-        #obb = self.get_object()
-        print('******')
         print(self.request.data)
         return qs
-
-    # def get_object(self):
-    #    print('!!!')
-    #    print(self)
-    #    print('*-------')
-
-    # print('aaa1')
-    # user.set_password(serializer.data['password'])
-    # user.save()
-
-    # queryset     = MixPost.objects.all()
-
-    # def get_queryset(self):
-    #    print('aaa11')
-    #    return MixPost.objects.all()
-
-    # def get_object(self):
-    #    pk = self.kwargs.get("pk")
-    #    sss = MixPost.objects.get(pk=pk)
-    #    print('aaa')
-    #    return MixPost.objects.get(pk=pk)
-
-    # def put(self, request, *args, **kwargs):
-    #   return self.update(request, *args, **kwargs)
-
-    # def update(self, request, pk=None):
-    #     print('aaa12')
-    #    pass
 
 
 class PostVer2Detail(generics.RetrieveAPIView):
